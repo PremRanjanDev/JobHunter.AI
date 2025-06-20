@@ -17,6 +17,7 @@ export class JsonFile {
                     data = [data];
                 }
             } catch (e) {
+                console.error(`Failed to parse JSON from ${this.filePath}:`, e);
                 data = [];
             }
         }

@@ -1,7 +1,7 @@
-import { readJobFormByAI } from '../ai/ai-utils.js';
-import { JsonFile } from '../utils/json-utils.js';
+import { JsonFile } from '../utils/json-utils.js'
 import fs from 'fs';
 import path from 'path';
+import { waitForTimeout } from '../utils/common-utils.js';
 
 const WAIT_FOR_CONTROL = 5000; // 5 seconds timeout for waiting for controls
 
@@ -31,7 +31,7 @@ export async function applyJobsEasyApply(page, keyword, location) {
     console.log(`Found ${jobs.length} job listings.`);
 
     for (const job of jobs) {
-        await processJob(page, job, jsonFile);
+        await applyJob(page, job);
     }
 }
 
@@ -44,13 +44,13 @@ async function fetchJobList(page, jobTitle, location, pageNumber = 1) {
         try {
             await page.waitForSelector(paginationSelector, { timeout: WAIT_FOR_CONTROL });
             await page.click(paginationSelector, { timeout: WAIT_FOR_CONTROL });
-            await page.waitForTimeout(2000);
+            await waitForTimeout(2000); // Wait for the page to load after clicking
         } catch (e) {
             console.log(`Could not click pagination button for page ${pageNumber}: ${e}`);
         }
     }
 
-    await page.waitForTimeout(2000);
+    await waitForTimeout(2000);
     let jobs = await page.$$('.job-card-container--clickable');
 
     let prevJobLen = 0;
@@ -60,7 +60,7 @@ async function fetchJobList(page, jobTitle, location, pageNumber = 1) {
         if (jobs.length > 0) {
             await jobs[jobs.length - 1].evaluate(el => el.scrollIntoView({ behavior: 'smooth', block: 'center' }));
         }
-        await page.waitForTimeout(1000);
+        await waitForTimeout(1000);
         jobs = await page.$$('.job-card-container--clickable');
     }
 
