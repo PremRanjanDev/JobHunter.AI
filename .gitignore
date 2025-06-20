@@ -1,0 +1,34 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# VSCode
+.vscode/
+
+# Environment
+.env
+.env.*
+
+# Output and user data
+dist/
+build/
+output/
+user_data/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Keys and secrets
+keys/
+
+# Logs
+logs/
+*.log
+
+# Misc
+*.swp
+*.swo
+.idea/

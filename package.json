@@ -1,0 +1,17 @@
+{
+    "name": "ja-ai-js",
+    "version": "1.0.0",
+    "description": "JavaScript port of JobApplier.AI",
+    "main": "src/main.js",
+    "scripts": {
+        "start": "node src/main.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "openai": "^5.5.1",
+        "puppeteer": "^24.10.2"
+    },
+    "type": "module"
+}
