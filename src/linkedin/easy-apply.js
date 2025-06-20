@@ -51,7 +51,8 @@ async function fetchJobList(page, jobTitle, location, pageNumber = 1) {
     }
 
     await waitForTimeout(2000);
-    let jobs = await page.$$('.job-card-container--clickable');
+    const jobInfoSelector = '.job-card-container--clickable';
+    let jobs = await page.$$(jobInfoSelector);
 
     let prevJobLen = 0;
     while (jobs.length !== prevJobLen) {
@@ -61,7 +62,7 @@ async function fetchJobList(page, jobTitle, location, pageNumber = 1) {
             await jobs[jobs.length - 1].evaluate(el => el.scrollIntoView({ behavior: 'smooth', block: 'center' }));
         }
         await waitForTimeout(1000);
-        jobs = await page.$$('.job-card-container--clickable');
+        jobs = await page.$$(jobInfoSelector);
     }
 
     return jobs;
